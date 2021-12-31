@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
@@ -15,15 +14,16 @@ func main() {
 	a := app.New()
 	w := a.NewWindow("Hello")
 	l := widget.NewLabel("Hello Fyne")
-	s := widget.NewSlider(0, 100)
-	b := widget.NewButton("Check", func() {
-		l.SetText("value: " + strconv.Itoa(int(s.Value)))
-	})
+	sl := widget.NewSelect(
+		[]string{"Apple", "Orange", "Peach"},
+		func(s string) {
+			l.SetText("selected: " + s)
+		},
+	)
 	w.SetContent(
 		container.NewVBox(
 			l,
-			s,
-			b,
+			sl,
 		),
 	)
 
