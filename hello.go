@@ -9,20 +9,29 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+func total(n int) int {
+	t := 0
+	for i := 1; i <= n; i++ {
+		t += i
+	}
+	return t
+}
+
 func main() {
 	fmt.Println("start!")
-
-	c := 0
 
 	a := app.New()
 	w := a.NewWindow("Hello")
 	l := widget.NewLabel("Hello Fyne!")
+	e := widget.NewEntry()
+	e.SetText("0")
 	w.SetContent(
 		container.NewVBox(
 			l,
+			e,
 			widget.NewButton("Click me!", func() {
-				c++
-				l.SetText("count:" + strconv.Itoa(c))
+				n, _ := strconv.Atoi(e.Text)
+				l.SetText("Total: " + strconv.Itoa(total(n)))
 			}),
 		),
 	)
