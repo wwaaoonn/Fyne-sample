@@ -15,18 +15,21 @@ func main() {
 	a := app.New()
 	w := a.NewWindow("Hello")
 
-	bt := widget.NewButton("Top", nil)
-	bb := widget.NewButton("Bottom", nil)
-	bl := widget.NewButton("Left", nil)
-	br := widget.NewButton("Right", nil)
-
 	w.SetContent(
 		container.New(
-			layout.NewBorderLayout(
-				bt, bb, bl, br,
-			),
-			bt, bb, bl, br,
-			widget.NewLabel("Center"),
+			layout.NewGridLayout(3),
+			widget.NewButton("One", nil),
+			widget.NewButton("Two", nil),
+			widget.NewButton("Three", nil),
+			widget.NewButton("Four", nil),
+			layout.NewSpacer(),
+			widget.NewButton("Five", nil),
+			widget.NewButton("Six", nil),
+			layout.NewSpacer(),
+			widget.NewButton("Seven", nil),
+			widget.NewButton("Eight", nil),
+			widget.NewButton("Nine", nil),
+			widget.NewButton("Ten", nil),
 		),
 	)
 
