@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
@@ -11,19 +12,18 @@ import (
 func main() {
 	fmt.Println("start!")
 
-	a := app.New()
+	c := 0
 
+	a := app.New()
 	w := a.NewWindow("Hello")
+	l := widget.NewLabel("Hello Fyne!")
 	w.SetContent(
-		container.NewHBox(
-			container.NewVBox(
-				widget.NewLabel("Hello Fyne!"),
-				widget.NewLabel("This is the sample app!"),
-			),
-			container.NewVBox(
-				widget.NewLabel("Hello Fyne!"),
-				widget.NewLabel("This is the sample app!"),
-			),
+		container.NewVBox(
+			l,
+			widget.NewButton("Click me!", func() {
+				c++
+				l.SetText("count:" + strconv.Itoa(c))
+			}),
 		),
 	)
 
