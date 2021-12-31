@@ -14,18 +14,21 @@ func main() {
 	a := app.New()
 	w := a.NewWindow("Hello")
 	l := widget.NewLabel("Hello Fyne")
-	c := widget.NewCheck("Check me!", func(b bool) {
-		if b {
-			l.SetText("CHECKED!!")
-		} else {
-			l.SetText("not checked..")
-		}
-	})
-	c.SetChecked(true)
+	r := widget.NewRadioGroup(
+		[]string{"One", "Two", "Three"},
+		func(s string) {
+			if s == "" {
+				l.SetText("not selected..")
+			} else {
+				l.SetText("selected: " + s)
+			}
+		},
+	)
+	r.SetSelected("One")
 	w.SetContent(
 		container.NewVBox(
 			l,
-			c,
+			r,
 		),
 	)
 
