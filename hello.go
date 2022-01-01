@@ -17,7 +17,7 @@ func main() {
 
 	w.SetContent(
 		container.New(
-			layout.NewGridLayout(3),
+			layout.NewGridLayoutWithRows(3),
 			widget.NewButton("One", nil),
 			widget.NewButton("Two", nil),
 			widget.NewButton("Three", nil),
