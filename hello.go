@@ -16,19 +16,21 @@ func main() {
 
 	a := app.New()
 	w := a.NewWindow("Hello")
-	l := widget.NewLabel("This is Sample widget.")
-	b := widget.NewButton("Confirm", func() {
-		dialog.ShowConfirm("Confirm",
-			"Please check 'YES'!",
-			func(b bool) {
-				if b {
-					l.SetText("OK, thank you!!")
-				} else {
-					l.SetText("oh...")
-				}
-			},
-			w,
-		)
+	l := widget.NewLabel("Hello Fyne!")
+	ne := widget.NewEntry()
+	pe := widget.NewPasswordEntry()
+	fr := widget.NewForm(
+		widget.NewFormItem("Name", ne),
+		widget.NewFormItem("Pass", pe),
+	)
+	b := widget.NewButton("Click", func() {
+		dialog.ShowCustomConfirm("Enter message.", "OK", "Cancel", fr, func(b bool) {
+			if b {
+				l.SetText("Name: '" + ne.Text + "' Pass: '" + pe.Text + "'")
+			} else {
+				l.SetText("no message...")
+			}
+		}, w)
 	})
 
 	w.SetContent(
