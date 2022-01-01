@@ -6,8 +6,6 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/layout"
-	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -17,25 +15,24 @@ func main() {
 	a := app.New()
 	w := a.NewWindow("Hello")
 	l := widget.NewLabel("This is Sample widget.")
-	tb := widget.NewToolbar(
-		widget.NewToolbarAction(theme.HomeIcon(), func() {
-			l.SetText("Select Home Icon!")
-		}),
-		widget.NewToolbarAction(theme.InfoIcon(), func() {
-			l.SetText("Select Infomation Icon!")
-		}),
-		widget.NewToolbarAction(theme.ComputerIcon(), func() {
-			l.SetText("Select Computer Icon!")
-		}),
+
+	mm := fyne.NewMainMenu(
+		fyne.NewMenu("File",
+			fyne.NewMenuItem("New", func() {
+				l.SetText("select 'New' menu item.")
+			}),
+			fyne.NewMenuItem("Quit", func() {
+				a.Quit()
+			}),
+		),
 	)
 
+	w.SetMainMenu(mm)
+
 	w.SetContent(
-		container.New(
-			layout.NewBorderLayout(
-				nil, tb, nil, nil,
-			),
+		container.NewVBox(
 			l,
-			tb,
+			widget.NewButton("ok", nil),
 		),
 	)
 
