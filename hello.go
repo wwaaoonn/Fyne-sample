@@ -6,6 +6,8 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/dialog"
+	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -15,24 +17,27 @@ func main() {
 	a := app.New()
 	w := a.NewWindow("Hello")
 	l := widget.NewLabel("This is Sample widget.")
-
-	mm := fyne.NewMainMenu(
-		fyne.NewMenu("File",
-			fyne.NewMenuItem("New", func() {
-				l.SetText("select 'New' menu item.")
-			}),
-			fyne.NewMenuItem("Quit", func() {
-				a.Quit()
-			}),
-		),
-	)
-
-	w.SetMainMenu(mm)
+	b := widget.NewButton("Confirm", func() {
+		dialog.ShowConfirm("Confirm",
+			"Please check 'YES'!",
+			func(b bool) {
+				if b {
+					l.SetText("OK, thank you!!")
+				} else {
+					l.SetText("oh...")
+				}
+			},
+			w,
+		)
+	})
 
 	w.SetContent(
-		container.NewVBox(
+		container.New(
+			layout.NewBorderLayout(
+				nil, b, nil, nil,
+			),
 			l,
-			widget.NewButton("ok", nil),
+			b,
 		),
 	)
 
